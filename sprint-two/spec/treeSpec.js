@@ -72,4 +72,16 @@ describe("tree", function() {
     tree.traverse(cb);
     expect(result).to.eql([5, 7, 8, 6]);
   });
+
+  it('should map a new tree', function(){
+    let tree1 = Tree(1);
+    let cb = function(value){return 2*value;}
+    tree1.addChild(5);
+    tree1.addChild(6);
+    tree1.children[0].addChild(7);
+    tree1.children[0].addChild(8);
+    let copy = tree1.map(cb);
+    expect(tree1.children[0].children[0].value).to.equal(7);
+    expect(copy.children[0].children[0].value).to.equal(14);
+  })
 });

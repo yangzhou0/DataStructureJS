@@ -42,4 +42,14 @@ treeMethods.traverse = function(cb) {
   this.children.forEach(child => {
     child.traverse(cb);
   });
+
+  treeMethods.map = function(cb){
+  let parent = Tree(cb(this.value));
+  if (this.children.length){
+    this.children.forEach(function(child){
+      parent.children.push(child.map(cb));
+    })
+  }
+  return parent;
+}
 };
